@@ -12,15 +12,12 @@ echo "Updating Arch"
 pacman -Syu --noconfirm
 
 # Install php and mysql
-echo "Trying to install PHP and MySQL"
-pacman -S --needed --noconfirm php mariadb
-
-# Enable mysqli
-sed -i 's,;\(extension=mysqli.so\),\1,g' /etc/php/php.ini
+echo "Trying to install Haskell and MySQL"
+pacman -S --needed --noconfirm mariadb ghc cabal-install
 
 echo "Trying to start MySQL"
 systemctl enable mysqld.service
 systemctl start mysqld.service
 
 echo "Trying to create MySQL database"
-cat create_db.sql | mysql -u root
+cat /vagrant/create_db.sql | mysql -u root
